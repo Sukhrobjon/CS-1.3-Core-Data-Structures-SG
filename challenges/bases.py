@@ -43,26 +43,28 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    devidend = number
-    devisor = base
-    quoitent = 1
-    result = []
-    while quoitent != 0:
-        # check if devidend(number) is less than (base) 
+    dividend = number
+    divisor = base
+    quotient = 1
+    result = ''
+    while quotient != 0:
+        # check if dividend(number) is less than divisor(base) 
         # no need to devide remainer is equal to number itself
-        if devidend < devisor:
-            remainder = devidend
-            quoitent = 0
+        if dividend < divisor:
+            remainder = dividend
+            quotient = 0
         else:
-            remainder = devidend % devisor
+            remainder = dividend % divisor
             # updating the devidend until it is less than devisor
-            devidend = (devidend - remainder) // devisor
+            dividend = (dividend - remainder) // divisor
+
 
         if remainder > 9:
-            remainder = chr(remainder + 55)
-        result.append(str(remainder))
-    result = "".join(result[::-1])
-    return result
+            remainder = chr(remainder + 87)
+
+        result += str(remainder)
+    
+    return result[::-1]
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
@@ -81,7 +83,13 @@ def convert(digits, base1, base2):
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
     # ...
-    return 0
+    if base1 == base2:
+        return digits
+    
+    # first decode the digits to decimal version
+    decimal = decode(digits, base1)
+    result = encode(decimal, base2)
+    return result
 
 
 def main():
@@ -102,13 +110,13 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
+    main()
     # digits = 'AF'
     # base = 32
     # print("Base 10: {}".format(decode(digits, base)))
 
-    number = 921
-    base = 16
-    print(encode(number, base))
+    # number = 16
+    # base = 16
+    # print(encode(number, base))
     
     
