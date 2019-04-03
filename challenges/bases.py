@@ -17,21 +17,21 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Decode digits from binary (base 2)
     result = 0
-    num = 0
+    
     power = len(digits)-1
     for i in range(len(digits)):
-        num = (base**power) * int(digits[i])
-        print(i, power, num)
-        power -= 1
+        if digits[i] in string.ascii_lowercase:
+            digit = ord(digits[i]) - 87
+        elif digits[i] in string.ascii_uppercase:
+            digit = ord(digits[i]) - 55
+        else:
+            digit = int(digits[i])
+        
+        num = (base**power) * digit
         result += num
+        power -= 1
     return result
-    # ...
-    # TODO: Decode digits from hexadecimal (base 16)
-    # ...
-    # TODO: Decode digits from any base (2 up to 36)
-    # ...
 
 
 def encode(number, base):
@@ -90,6 +90,6 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    digits = '10101'
-    base = 2
+    digits = 'AF'
+    base = 32
     print("Base 10: {}".format(decode(digits, base)))
