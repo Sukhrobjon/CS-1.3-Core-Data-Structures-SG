@@ -17,8 +17,8 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    result = 0
     
+    result = 0
     power = len(digits)-1
     for i in range(len(digits)):
         if digits[i] in string.ascii_lowercase:
@@ -43,13 +43,26 @@ def encode(number, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
-    # TODO: Encode number in binary (base 2)
-    # ...
-    # TODO: Encode number in hexadecimal (base 16)
-    # ...
-    # TODO: Encode number in any base (2 up to 36)
-    # ...
+    devidend = number
+    devisor = base
+    quoitent = 1
+    result = []
+    while quoitent != 0:
+        # check if devidend(number) is less than (base) 
+        # no need to devide remainer is equal to number itself
+        if devidend < devisor:
+            remainder = devidend
+            quoitent = 0
+        else:
+            remainder = devidend % devisor
+            # updating the devidend until it is less than devisor
+            devidend = (devidend - remainder) // devisor
 
+        if remainder > 9:
+            remainder = chr(remainder + 55)
+        result.append(str(remainder))
+    result = "".join(result[::-1])
+    return result
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
@@ -90,6 +103,12 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    digits = 'AF'
-    base = 32
-    print("Base 10: {}".format(decode(digits, base)))
+    # digits = 'AF'
+    # base = 32
+    # print("Base 10: {}".format(decode(digits, base)))
+
+    number = 921
+    base = 16
+    print(encode(number, base))
+    
+    
