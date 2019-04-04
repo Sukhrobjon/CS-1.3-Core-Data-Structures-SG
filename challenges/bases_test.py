@@ -86,7 +86,7 @@ class BasesDecodeTest(unittest.TestCase):
 class BasesEncodeTest(unittest.TestCase):
 
     def test_encode_binary(self):
-        # assert encode(0, 2) == '0'  # Should '' be valid?
+        assert encode(0, 2) == '0'  # Should '' be valid?
         assert encode(1, 2) == '1'
         assert encode(2, 2) == '10'
         assert encode(3, 2) == '11'
@@ -104,7 +104,7 @@ class BasesEncodeTest(unittest.TestCase):
         assert encode(15, 2) == '1111'
 
     def test_encode_decimal(self):
-        # assert encode(0, 10) == '0'  # Should '' be valid?
+        assert encode(0, 10) == '0'  # Should '' be valid?
         assert encode(5, 10) == '5'
         assert encode(10, 10) == '10'
         assert encode(25, 10) == '25'
