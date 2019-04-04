@@ -62,8 +62,8 @@ def encode(number, base):
         if remainder > 9:
             # in ascii table lower case 'a' is at the number 97
             # so adding 10 + 87 = 97 => 'a', 11 + 87 = 98 => 'b' and so on
-            # hex_letter_offset
-            remainder = chr(remainder + 87)
+            hex_letter_offset = 87
+            remainder = chr(remainder + hex_letter_offset)
 
         result += str(remainder)
     # if result == '':
