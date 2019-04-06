@@ -46,7 +46,13 @@ def encode(number, base):
     dividend = number
     divisor = base
     quotient = 1
+    
+    # in ascii table lower case 'a' is at the number 97
+    # so adding 10 + 87 = 97 => 'a', 11 + 87 = 98 => 'b' and so on
+    hex_letter_offset = 87
+
     result = ''
+
     while quotient != 0:
         # check if dividend(number) is less than divisor(base) 
         # if true no need to devide. then divedend = remainder 
@@ -58,16 +64,11 @@ def encode(number, base):
             # updating the dividend until it is less than devisor
             dividend = (dividend - remainder) // divisor
 
-
         if remainder > 9:
-            # in ascii table lower case 'a' is at the number 97
-            # so adding 10 + 87 = 97 => 'a', 11 + 87 = 98 => 'b' and so on
-            hex_letter_offset = 87
             remainder = chr(remainder + hex_letter_offset)
 
         result += str(remainder)
-    # if result == '':
-    #     return '0'
+        
     return result[::-1]
 
 def convert(digits, base1, base2):
