@@ -13,18 +13,15 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    return is_palindrome_iterative(text)
-    # return is_palindrome_recursive(text)
+    # return is_palindrome_iterative(text)
+    return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
     # TODO: implement the is_palindrome function iteratively here
     
     # normalize the string and remove all punctuation and whitespaces
-    
     text = re.sub('[^A-Za-z0-9]+', '', text.lower())
-    
-    print(text)
 
     last_index = len(text) - 1 
     for i in range(len(text)//2):
@@ -36,9 +33,24 @@ def is_palindrome_iterative(text):
 
 def is_palindrome_recursive(text, left=None, right=None):
     # TODO: implement the is_palindrome function recursively here
-    pass
-    # once implemented, change is_palindrome to call is_palindrome_recursive
-    # to verify that your iterative implementation passes all tests
+    
+    # normalize the string and remove all punctuation and whitespaces
+    
+    if left == None and right == None:
+        # text = re.sub('[^A-Za-z0-9]+', '', text.lower())
+
+        left = 0
+        right = len(text) - 1
+
+    if len(text) == 0 or len(text) == 1:
+        return True
+    
+    elif (left < right + 1):
+        return is_palindrome_recursive(text, left + 1, right -1)
+    
+    return False
+
+    
 
 
 def main():
@@ -58,6 +70,6 @@ def main():
 if __name__ == '__main__':
     # main()
 
-    text = "B - b"
+    text = "B-b"
     print(is_palindrome(text))
 
