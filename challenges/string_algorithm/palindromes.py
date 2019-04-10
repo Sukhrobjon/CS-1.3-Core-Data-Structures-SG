@@ -35,17 +35,16 @@ def is_palindrome_recursive(text, left=None, right=None):
     # TODO: implement the is_palindrome function recursively here
     
     # normalize the string and remove all punctuation and whitespaces
-    
-    if left == None and right == None:
-        # text = re.sub('[^A-Za-z0-9]+', '', text.lower())
+    text = re.sub('[^A-Za-z0-9]+', '', text.lower())
 
+    if left == None and right == None:
         left = 0
         right = len(text) - 1
 
-    if len(text) == 0 or len(text) == 1:
+    if left > right:
         return True
-    
-    elif (left < right + 1):
+
+    elif text[left] == text[right]:
         return is_palindrome_recursive(text, left + 1, right -1)
     
     return False
