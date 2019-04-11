@@ -41,7 +41,7 @@ def is_palindrome_recursive(text, left=None, right=None):
         left = 0
         right = len(text) - 1
 
-    if left > right:
+    if left >= right:
         return True
 
     elif text[left] == text[right]:
@@ -67,8 +67,5 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-
-    text = "B-b"
-    print(is_palindrome(text))
+    main()
 
