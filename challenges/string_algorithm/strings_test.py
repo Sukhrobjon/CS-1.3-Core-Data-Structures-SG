@@ -17,6 +17,7 @@ class StringsTest(unittest.TestCase):
         assert contains('abc', 'abc') is True  # all strings contain themselves
         assert contains('aaa', 'a') is True  # multiple occurrences
         assert contains('aaa', 'aa') is True  # overlapping pattern
+        assert contains('aaaaaaag', 'aaag') is True  # overlapping pattern
         # TODO: Write more positive test cases with assert is True statements
         # ...
 
