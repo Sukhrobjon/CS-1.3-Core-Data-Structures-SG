@@ -41,7 +41,7 @@ def find_all_indexes(text, pattern):
 
     index = 0
     window = len(pattern)
-    indecies = []
+    indexes = []
     
     if pattern == '': 
         # for empty pattern creates list of indecies of the text
@@ -51,10 +51,10 @@ def find_all_indexes(text, pattern):
         # greater or equals to catch the patter if it's last index
         while index <= len(text) - 1:
             if pattern == text[index:window + index]:
-                indecies.append(index)
+                indexes.append(index)
             index += 1
 
-    return indecies
+    return indexes
     
 
 def test_string_algorithms(text, pattern):
