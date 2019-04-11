@@ -17,16 +17,22 @@ def find_index(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_index here (iteratively and/or recursively)
     
-    index = 0
+    
     window = len(pattern)
 
     if len(pattern) == 0:
         return 0
 
     else: 
+        index = 0
+        # change the wile loop to for loop bc we know the number of iterations
         # greater or equals to catch the patter if it's last index
         while index <= len(text) - 1: 
+            # running time is "n" iterations => O(n*m) is total runnning time 
             if pattern == text[index : window + index]:
+                # C++ way checking the index it is faster and save up the memory and copying the string slice
+                # this is going to be O(m) if the pattern is big like paragraph
+                # and uses more memory O(m)
                 return index
             index += 1
 
@@ -39,13 +45,14 @@ def find_all_indexes(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
 
+    # instead of starting at 0, I can start where i found patter and start at the index + 1
     index = 0
     window = len(pattern)
     indexes = []
     
     if pattern == '': 
         # for empty pattern creates list of indecies of the text
-        return [i for i in range(len(text))] 
+        return list(range(len(text)))
 
     else:
         # greater or equals to catch the patter if it's last index
