@@ -7,10 +7,12 @@ def contains(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
     
-    # one simmple solution but it is cheating
-    if pattern not in text:
-        return False
-    return True
+    
+    index = find_index(text, pattern)
+    
+    if index != None:
+        return True
+    return False
 
 # def find_index(text, pattern):
 #     """Return the starting index of the first occurrence of pattern in text,
@@ -42,7 +44,7 @@ def contains(text, pattern):
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
-    or None if not found."""
+    or None if not found. C++ approach of acccessing the index of the string"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     
@@ -51,31 +53,52 @@ def find_index(text, pattern):
     
     starter = 0 # starting the new window 
     index = 0
-    subindex = 0
+    subindex = 0 # index for pattern 
 
 
     while index <= len(text) - 1:
-        print("index before if:", index)
-        print("subindex before if:", subindex)
+
         if text[index] == pattern[subindex]:
-            print("text[i]:", text[index])
-            print("patter[j]:", pattern[subindex])
             index += 1
             subindex +=1
-            print("index: ",index)
-            print("subindex: ", subindex)
-            if subindex == len(pattern):
-                print(subindex, len(pattern))
-                return starter
+
+            if subindex == len(pattern): # check for if we checked all index of patter  
+                # starter index of the text where pattern occured 1st time
+                return starter  
 
         else: # mismatch found 
-            starter += 1  
-            index = starter # set back index to the next
-            subindex = 0 # reset the subindex to 0 
+            starter += 1 # shift the starter to next index
+            index = starter 
+            subindex = 0 # reset the subindex 
         
     return None
 
 
+# def find_all_indexes(text, pattern):
+#     """Return a list of starting indexes of all occurrences of pattern in text,
+#     or an empty list if not found."""
+#     assert isinstance(text, str), 'text is not a string: {}'.format(text)
+#     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+#     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
+
+#     # instead of starting at 0, I can start where i found patter and start at the index + 1
+#     index = 0
+#     window = len(pattern)
+#     indexes = []
+    
+#     if pattern == '': 
+#         # for empty pattern creates list of indecies of the text
+#         return list(range(len(text)))
+
+#     else:
+#         # greater or equals to catch the patter if it's last index
+#         while index <= len(text) - 1:
+#             if pattern == text[index:window + index]:
+#                 indexes.append(index)
+#             index += 1
+
+#     return indexes
+    
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
@@ -83,24 +106,14 @@ def find_all_indexes(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
 
-    # instead of starting at 0, I can start where i found patter and start at the index + 1
-    index = 0
-    window = len(pattern)
+    index = find_index(text, pattern)
+
     indexes = []
-    
-    if pattern == '': 
-        # for empty pattern creates list of indecies of the text
+
+    if pattern == '':
         return list(range(len(text)))
-
-    else:
-        # greater or equals to catch the patter if it's last index
-        while index <= len(text) - 1:
-            if pattern == text[index:window + index]:
-                indexes.append(index)
-            index += 1
-
-    return indexes
     
+
 
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
