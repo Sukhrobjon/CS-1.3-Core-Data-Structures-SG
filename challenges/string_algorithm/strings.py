@@ -79,7 +79,7 @@ def find_index(text, pattern):
 #     or an empty list if not found."""
 #     assert isinstance(text, str), 'text is not a string: {}'.format(text)
 #     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-#     # TODO: Implement find_all_indexes here (iteratively and/or recursively)
+#  
 
 #     # instead of starting at 0, I can start where i found patter and start at the index + 1
 #     index = 0
@@ -104,14 +104,44 @@ def find_all_indexes(text, pattern):
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
 
+    if pattern == '':  # all strings contain empty string
+        # and creae a list with the number of items equals to length of the text
+        return list(range(len(text))) 
+
+    
+    # get the first occurance of the pattern in the text to cut the running time 
     index = find_index(text, pattern)
-
+    
     indexes = []
+    
+    if index != None: # pattern occured in the text so we can check if there are more
+        indexes.append(index)
 
-    if pattern == '':
-        return list(range(len(text)))
+        index = index + 1 # check for the char 1 next to the index 
+        starter = index  # starting the new window
+        subindex = 0  # index for pattern
+
+        while index <= len(text) - 1:
+            if text[index] == pattern[subindex]:
+                index += 1
+                subindex += 1
+                
+                if subindex == len(pattern):  # found another occurance of the pattern
+                    
+                    indexes.append(starter)
+                    subindex = 0 # reset the subindex
+                    starter += 1 # 
+                    index = starter
+
+            else:  # mismatch found
+                subindex = 0  # reset the subindex
+                starter += 1  # shift the starter to next index
+                index = starter
+    
+        return indexes # all occured list of indexes 
+    
+    return  indexes # not found return empty list
     
 
 
@@ -145,6 +175,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
-
+    # main()
+    # indexes1 = find_all_indexes('abcabcabc', 'abc')
+    # print("result => [0, 3, 6]: ", indexes1)
+    indexes2 = find_all_indexes('abcabcdabcde', 'abcd')
+    print("indexes2 => [3, 7]: ", indexes2)
     
