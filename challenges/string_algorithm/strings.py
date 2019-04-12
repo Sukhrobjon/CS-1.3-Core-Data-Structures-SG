@@ -6,37 +6,75 @@ def contains(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
+    
+    # one simmple solution but it is cheating
     if pattern not in text:
         return False
     return True
+
+# def find_index(text, pattern):
+#     """Return the starting index of the first occurrence of pattern in text,
+#     or None if not found."""
+#     assert isinstance(text, str), 'text is not a string: {}'.format(text)
+#     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
+#     # TODO: Implement find_index here (iteratively and/or recursively)
+    
+#     window = len(pattern)
+
+#     if len(pattern) == 0:
+#         return 0
+
+#     else: 
+#         index = 0
+#         # change the wile loop to for loop bc we know the number of iterations
+#         # greater or equals to catch the patter if it's last index
+#         while index <= len(text) - 1: 
+#             # running time is "n" iterations => O(n*m) is total runnning time 
+#             if pattern == text[index : window + index]:
+#                 # C++ way checking the index is faster and save up the memory and copying the string slice
+#                 # this is going to be O(m) if the pattern is big like paragraph
+#                 # and uses more memory O(m)
+#                 return index
+#             index += 1
+
+#     return None   
+
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
     
-    
-    window = len(pattern)
-
-    if len(pattern) == 0:
+    if pattern == "":
         return 0
+    
+    starter = 0 # starting the new window 
+    index = 0
+    subindex = 0
 
-    else: 
-        index = 0
-        # change the wile loop to for loop bc we know the number of iterations
-        # greater or equals to catch the patter if it's last index
-        while index <= len(text) - 1: 
-            # running time is "n" iterations => O(n*m) is total runnning time 
-            if pattern == text[index : window + index]:
-                # C++ way checking the index it is faster and save up the memory and copying the string slice
-                # this is going to be O(m) if the pattern is big like paragraph
-                # and uses more memory O(m)
-                return index
+
+    while index <= len(text) - 1:
+        print("index before if:", index)
+        print("subindex before if:", subindex)
+        if text[index] == pattern[subindex]:
+            print("text[i]:", text[index])
+            print("patter[j]:", pattern[subindex])
             index += 1
+            subindex +=1
+            print("index: ",index)
+            print("subindex: ", subindex)
+            if subindex == len(pattern):
+                print(subindex, len(pattern))
+                return starter
 
-    return None   
+        else: # mismatch found 
+            starter += 1  
+            index = starter # set back index to the next
+            subindex = 0 # reset the subindex to 0 
+        
+    return None
+
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
@@ -95,3 +133,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    
