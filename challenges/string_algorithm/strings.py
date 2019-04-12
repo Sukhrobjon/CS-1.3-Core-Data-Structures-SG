@@ -14,33 +14,6 @@ def contains(text, pattern):
         return True
     return False
 
-# def find_index(text, pattern):
-#     """Return the starting index of the first occurrence of pattern in text,
-#     or None if not found."""
-#     assert isinstance(text, str), 'text is not a string: {}'.format(text)
-#     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-#     # TODO: Implement find_index here (iteratively and/or recursively)
-    
-#     window = len(pattern)
-
-#     if len(pattern) == 0:
-#         return 0
-
-#     else: 
-#         index = 0
-#         # change the wile loop to for loop bc we know the number of iterations
-#         # greater or equals to catch the patter if it's last index
-#         while index <= len(text) - 1: 
-#             # running time is "n" iterations => O(n*m) is total runnning time 
-#             if pattern == text[index : window + index]:
-#                 # C++ way checking the index is faster and save up the memory and copying the string slice
-#                 # this is going to be O(m) if the pattern is big like paragraph
-#                 # and uses more memory O(m)
-#                 return index
-#             index += 1
-
-#     return None   
-
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
@@ -51,8 +24,8 @@ def find_index(text, pattern):
     if pattern == "":
         return 0
     
-    starter = 0 # starting the new window 
-    index = 0
+    starter = 0 # the starting index of the patterin in the text
+    index = 0 # index for text
     subindex = 0 # index for pattern 
 
 
@@ -74,31 +47,6 @@ def find_index(text, pattern):
     return None
 
 
-# def find_all_indexes(text, pattern):
-#     """Return a list of starting indexes of all occurrences of pattern in text,
-#     or an empty list if not found."""
-#     assert isinstance(text, str), 'text is not a string: {}'.format(text)
-#     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-#  
-
-#     # instead of starting at 0, I can start where i found patter and start at the index + 1
-#     index = 0
-#     window = len(pattern)
-#     indexes = []
-    
-#     if pattern == '': 
-#         # for empty pattern creates list of indecies of the text
-#         return list(range(len(text)))
-
-#     else:
-#         # greater or equals to catch the patter if it's last index
-#         while index <= len(text) - 1:
-#             if pattern == text[index:window + index]:
-#                 indexes.append(index)
-#             index += 1
-
-#     return indexes
-    
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
