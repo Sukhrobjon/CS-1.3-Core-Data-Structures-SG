@@ -58,18 +58,20 @@ class LinkedList(object):
     def length(self):
         """Return the length of this linked list by traversing its nodes.
         Best and worst case running time: ??? under what conditions? [TODO]"""
-        # Node counter initialized to zero
-        # node_count = 0
-        # # Start at the head node
-        # node = self.head
-        # # Loop until the node is None, which is one node too far past the tail
-        # while node is not None:
-        #     # Count one for this node
-        #     node_count += 1
-        #     # Skip to the next node
-        #     node = node.next
-        # # Now node_count contains the number of nodes
-        # return node_count
+        
+        """# Node counter initialized to zero
+        node_count = 0
+        # Start at the head node
+        node = self.head
+        # Loop until the node is None, which is one node too far past the tail
+        while node is not None:
+            # Count one for this node
+            node_count += 1
+            # Skip to the next node
+            node = node.next
+        # Now node_count contains the number of nodes
+        return node_count"""
+
         return self.size
 
     def get_at_index(self, index):
@@ -81,6 +83,16 @@ class LinkedList(object):
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
         # TODO: Find the node at the given index and return its data
+        current_node = self.head
+        count = 0 # keeping track count of the node
+        while (current_node != None):
+            # check if index and count are equal if so return the data
+            if count == index:
+                return current_node.data
+            else:
+                count += 1
+                current_node = current_node.next
+        
 
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
