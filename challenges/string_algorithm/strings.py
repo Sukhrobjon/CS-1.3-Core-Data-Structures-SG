@@ -2,22 +2,24 @@
 
 
 def contains(text, pattern):
-    """Return a boolean indicating whether pattern occurs in text."""
+    """Return a boolean indicating whether pattern occurs in text.
+    Run time: """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
     
     
-    index = find_index(text, pattern)
+    index = find_index(text, pattern) # find_index() function is O(n*m)
     
-    if index != None:
+    if index != None: # O(1)
         return True
     return False
 
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
-    or None if not found. C++ approach of acccessing the index of the string"""
+    or None if not found. This is more C++ way of checking the chars in the string
+    Run time: O(n*m), n is length of the string,"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     
