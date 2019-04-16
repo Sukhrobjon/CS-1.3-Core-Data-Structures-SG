@@ -77,21 +77,22 @@ class LinkedList(object):
     def get_at_index(self, index):
         """Return the item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) if index is the head or near the head node
+        Worst case running time: O(n) if index is the tail or near the tail,
+        where n is number of nodes in linked list"""
+        
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node at the given index and return its data
+        
+        
         current_node = self.head
-        count = 0 # keeping track count of the node
-        while (current_node != None):
-            # check if index and count are equal if so return the data
-            if count == index:
-                return current_node.data
-            else:
-                count += 1
-                current_node = current_node.next
+
+        for _ in range(index): # loop through the linkedlist until we get the index
+            current_node = current_node.next
+        
+        return current_node.data
+
         
 
     def insert_at_index(self, index, item):
@@ -102,7 +103,25 @@ class LinkedList(object):
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node before the given index and insert item after it
+
+        # if index at the head use prepend method
+        if index == 0: 
+            return self.prepend(item)
+        
+        # if index is at the end, just append to the linked list
+        elif index == self.size: 
+            return self.append(item)
+        
+        current_node = self.head
+        
+        # stop right before the index we want to insert at 
+        for _ in range(index - 1):
+            current_node = current_node.next
+        
+        new_node = Node(item)
+        new_node.next = current_node
+        current_node.next = new_node
+        self.size += 1
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
