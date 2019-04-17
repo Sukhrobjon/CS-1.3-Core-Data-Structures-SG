@@ -78,7 +78,6 @@ def find_all_indexes(text, pattern):
                 subindex += 1
                 
                 if subindex == len(pattern):  # found another occurance of the pattern
-                    
                     indexes.append(starter)
                     subindex = 0 # reset the subindex
                     starter += 1 # 
