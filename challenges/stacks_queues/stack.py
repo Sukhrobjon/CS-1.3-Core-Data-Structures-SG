@@ -105,6 +105,8 @@ class ArrayStack(object):
         if self.is_empty():
             raise ValueError("Stack is empty.")
         
+        # when no parameter passed in pop() it pops the last element 
+        # in the list so we dont need to specify the index here
         return self.list.pop()
 
 
