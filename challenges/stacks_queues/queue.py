@@ -49,12 +49,8 @@ class LinkedQueue(object):
             raise ValueError("Queue is empty.")
 
         # get the head data
-        item = self.list.head.data
-        # switch the head pointer to the next node
-        self.list.head = self.list.head.next
-
-        self.list.size -= 1
-
+        item = self.front()
+        self.list.delete(item)
         return item
 
 
@@ -106,5 +102,5 @@ class ArrayQueue(object):
 
 # Implement LinkedQueue and ArrayQueue above, then change the assignment below
 # to use each of your Queue implementations to verify they each pass all tests
-# Queue = LinkedQueue
-Queue = ArrayQueue
+Queue = LinkedQueue
+# Queue = ArrayQueue

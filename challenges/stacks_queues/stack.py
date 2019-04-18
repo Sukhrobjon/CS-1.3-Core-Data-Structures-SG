@@ -29,7 +29,8 @@ class LinkedStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) prepend uses the .head property 
+        to add new node"""
         self.list.prepend(item)
 
     def peek(self):
@@ -38,6 +39,7 @@ class LinkedStack(object):
         
         if self.is_empty(): 
             return None # stack is empty
+            
         # return the head node (top item) in the stack 
         return self.list.head.data
 
@@ -49,14 +51,13 @@ class LinkedStack(object):
         if(self.is_empty()):
             raise ValueError("Stack is empty.")
         
-        # get the head data 
-        popped = self.list.head.data 
-        # switch the head pointer to the next node 
-        self.list.head = self.list.head.next
+        # get top node head
+        top_item = self.peek() 
         
-        self.list.size -= 1
+        self.list.delete(top_item)
 
-        return popped
+        return top_item
+        
 
 # Implement ArrayStack below, then change the assignment at the bottom
 # to use this Stack implementation to verify it passes all tests
