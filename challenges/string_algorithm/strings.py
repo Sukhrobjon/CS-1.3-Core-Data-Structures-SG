@@ -3,7 +3,9 @@
 
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text.
-    Run time: """
+    Run time: O(m*n) because to I am calling find_index() and it takes 
+    O(m*n). From there I obtain the index and check if it is exist or not.
+    Space Complexity: O(1) because I only create a variable to store the index."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
@@ -18,8 +20,12 @@ def contains(text, pattern):
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
-    or None if not found. This is more C++ way of checking the chars in the string
-    Run time: O(n*m), n is length of the string,"""
+    or None if not found. C++ way of checking the chars in the string method used.
+    Run time: O(n*m), n is length of the string, m is for if statement to check
+    match is found.
+    Space Complexity: O(1) because I am accessing the array indexes, it takes O(1)
+    and doesn't create a new memory as opposed to pyhton slicing. 
+    Also, I am not creating a array, just 3 variable to store the indexes"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     
@@ -51,7 +57,12 @@ def find_index(text, pattern):
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
-    or an empty list if not found."""
+    or an empty list if not found.
+    Run time: O(n*m), n is length of the string, m is for if statement to check
+    match is found.
+    Space Complexity: O(n) because I am creating an array to store the all indexes, 
+    so array takes n space in the memmory.
+    """
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
 
