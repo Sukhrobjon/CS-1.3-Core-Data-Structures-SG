@@ -54,6 +54,11 @@ class HashTable(object):
         # Collect all pairs of key-value entries in each of the buckets
         all_items = []
         for bucket in self.buckets:
+            # line all_items += bucket.items() and all_items.extend(bucket.items()) 
+            # give same end result but first one takes more time and memory to move 
+            # each item to newly allocated array and concatenated
+            
+            # all_items += bucket.items() 
             all_items.extend(bucket.items())
         return all_items
 
@@ -110,10 +115,11 @@ class HashTable(object):
             # In this case, the given key's value is being updated
             # Remove the old key-value entry from the bucket first
             bucket.delete(entry)
-            self.size -= 1
+        else:
+            self.size += 1
         # Insert the new key-value entry into the bucket in either case
         bucket.append((key, value))
-        self.size += 1
+        
         # TODO: Check if the load factor exceeds a threshold such as 0.75
         # TODO: If so, automatically resize to reduce the load factor
         
@@ -155,10 +161,11 @@ class HashTable(object):
         # ...
         # TODO: Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
-        current = self.items()
-        self.buckets = [LinkedList() for i in range(new_size)]
-        self.size = 0
-        for key, value in current:
+        old_items = self.items()
+        # self.buckets = [LinkedList() for i in range(new_size)]
+        # self.size = 0
+        self.__init__(new_size)
+        for key, value in old_items:
             self.set(key, value)
 
 
