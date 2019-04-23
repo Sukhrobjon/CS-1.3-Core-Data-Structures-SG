@@ -7,6 +7,8 @@ class HashTable(object):
 
     def __init__(self, init_size=8):
         """Initialize this hash table with the given initial size."""
+
+        # NOTE: This is called from _resize() method
         self.buckets = [LinkedList() for i in range(init_size)]
         self.size = 0  # Number of key-value entries
 
@@ -161,12 +163,15 @@ class HashTable(object):
         # ...
         # TODO: Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
-        old_items = self.items()
+        old_items = self.items() # copy the all items 
         # self.buckets = [LinkedList() for i in range(new_size)]
         # self.size = 0
+        
+        # EXPLAIN THIS WITH BETTER LANGUAGE
         self.__init__(new_size)
+        
         for key, value in old_items:
-            self.set(key, value)
+            self.set(key, value) # setting the old values to resized hashtable buckets
 
 
 
