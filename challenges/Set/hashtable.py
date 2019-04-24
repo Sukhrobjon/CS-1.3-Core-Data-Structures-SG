@@ -2,6 +2,7 @@
 
 from linkedlist import LinkedList
 
+
 class HashTable(object):
 
     def __init__(self, init_size=8):
@@ -27,7 +28,7 @@ class HashTable(object):
     def load_factor(self):
         """Return the load factor, the ratio of number of entries to buckets.
         Best and worst case running time: ??? under what conditions? [TODO]"""
-        return self.size /  len(self.buckets)
+        return self.size / len(self.buckets)
 
     def keys(self):
         """Return a list of all keys in this hash table.
@@ -55,11 +56,11 @@ class HashTable(object):
         # Collect all pairs of key-value entries in each of the buckets
         all_items = []
         for bucket in self.buckets:
-            # line all_items += bucket.items() and all_items.extend(bucket.items()) 
-            # give same end result but first one takes more time and memory to move 
+            # line all_items += bucket.items() and all_items.extend(bucket.items())
+            # give same end result but first one takes more time and memory to move
             # each item to newly allocated array and concatenated
-            
-            # all_items += bucket.items() 
+
+            # all_items += bucket.items()
             all_items.extend(bucket.items())
         return all_items
 
@@ -120,13 +121,12 @@ class HashTable(object):
             self.size += 1
         # Insert the new key-value entry into the bucket in either case
         bucket.append((key, value))
-        
+
         # TODO: Check if the load factor exceeds a threshold such as 0.75
         # TODO: If so, automatically resize to reduce the load factor
-        
+
         if self.load_factor() > 0.75:
             self._resize()
-        
 
     def delete(self, key):
         """Delete the given key and its associated value, or raise KeyError.
@@ -162,16 +162,16 @@ class HashTable(object):
         # ...
         # TODO: Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
-        old_items = self.items() # copy the all items 
+        old_items = self.items()  # copy the all items
         # self.buckets = [LinkedList() for i in range(new_size)]
         # self.size = 0
-        
+
         # EXPLAIN THIS WITH BETTER LANGUAGE
         self.__init__(new_size)
-        
-        for key, value in old_items:
-            self.set(key, value) # setting the old values to resized hashtable buckets
 
+        for key, value in old_items:
+            # setting the old values to resized hashtable buckets
+            self.set(key, value)
 
 
 def test_hash_table():

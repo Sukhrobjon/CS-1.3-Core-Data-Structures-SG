@@ -1,199 +1,87 @@
 #!python
 
-from linkedlist import LinkedList
-
+from hashtable import HashTable
 
 class Set(object):
+    def __init__(self, elements=None):
+        """Initialize set as an empty hash table."""
+        self.table = HashTable()
 
-    def __init__(self, init_size=8, elements=None):
-        """Initialize this set with the given initial size."""
+        if len(elements) != 0:
+            for elem in elements:
+                self.table.set(elem, None)
 
-        # NOTE: This is called from _resize() method
-        self.buckets = [LinkedList() for i in range(init_size)]
-        self.size = 0  # Number of elements
-
-    def __str__(self):
-        """Return a formatted string representation of this hash table."""
-        items = ['{!r}: {!r}'.format(key, val) for key, val in self.items()]
-        return '{' + ', '.join(items) + '}'
+    def __iter__(self):
+        """Return iterable set."""
+        return iter(self.table.keys())
 
     def __repr__(self):
-        """Return a string representation of this hash table."""
-        return 'HashTable({!r})'.format(self.items())
+        """Return a string representation of this Set."""
+        items = ['{!r}'.format(key) for key in self.table.keys()]
+        return '{' + ', '.join(items) + '}'
 
-    def _bucket_index(self, element):
-        """Return the bucket index where the given element would be stored."""
-        return hash(element) % len(self.buckets)
-
-    def load_factor(self):
-        """Return the load factor, the ratio of number of entries to buckets.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
-        return self.size / len(self.buckets)
-
-    def items(self):
-        """Return a list of all entries (key-value pairs) in this hash table.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
-        # Collect all pairs of key-value entries in each of the buckets
-        all_items = []
-        for bucket in self.buckets:
-            # line all_items += bucket.items() and all_items.extend(bucket.items())
-            # give same end result but first one takes more time and memory to move
-            # each item to newly allocated array and concatenated
-
-            # all_items += bucket.items()
-            all_items.extend(bucket.items())
-        return all_items
-
-    def length(self):
-        """Return the number of key-value entries by traversing its buckets.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
-        # Count number of key-value entries in each of the buckets
-        item_count = 0
-        for bucket in self.buckets:
-            item_count += bucket.length()
-        return item_count
-        # Equivalent to this list comprehension:
-        # return sum(bucket.length() for bucket in self.buckets)
-
-    def contains(self, element):
-        """Return True if this hash table contains the given key, or False.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
-        # Find the bucket the given key belongs in
-        index = self._bucket_index(element)
-        bucket = self.buckets[index]
-        # Check if an entry with the given key exists in that bucket
-        entry = bucket.find(element)
-        return entry is not None # True or False
-    def get(self, element):
-        """Return the value associated with the given key, or raise KeyError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
-        # Find the bucket the given key belongs in
-        index = self._bucket_index(key)
-        bucket = self.buckets[index]
-        # Find the entry with the given key in that bucket, if one exists
-        entry = bucket.find(lambda key_value: key_value[0] == key)
-        if entry is not None:  # Found
-            # Return the given key's associated value
-            assert isinstance(entry, tuple)
-            assert len(entry) == 2
-            return entry[1]
-        else:  # Not found
-            raise KeyError('Key not found: {}'.format(key))
-
-    def add(self, element):
-        """Insert new element.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
-        # Find the bucket the given element belongs in
-        index = self._bucket_index(element)
-        bucket = self.buckets[index]
-        
-        # Check if an entry with the given key exists in that bucket
-        entry = bucket.find(element)
+    def size(self):
+        """Returns the number of elements in the set."""
     
-        if entry is None:
-            bucket.prepend(element)
+        return self.table.length()  # O(1)
+
+    def contains(self, elem):
+        """Returns True if element is in the set and False otherwise.
+        """
+
+        # Pass the element as a key to call the hash table method contains().
+        return self.table.contains(elem)
+
+    def add(self, elem):
+        """Add element to this set, if not present already"""
+        if not self.contains(elem):  
+            # Credit goes to Zurich Okoren for correcting me to pass correct params
+            self.table.set(elem, None)  
         else:
-            print("Set can contain unique values")
+            raise KeyError("Item is already in the set.")
+
+    def remove(self, elem):
+        """Removes item to the set.
+        Best and Worst case running time: O(1)"""
+        if self.contains(elem):  
+            self.table.delete(elem)  
+        else:
+            raise KeyError("Element: {} not in set.".format(elem))
+
+    def union(self, other_set):
+        """Return a new set that is the union of this set and other_set"""
         
-        # Check if the load factor exceeds a threshold such as 0.75
-        # If so, automatically resize to reduce the load factor
-        if self.load_factor() > 0.75:
-            self._resize()
+        new_set = Set()
 
-    def remove(self, element):
-        """Delete the given key and its associated value, or raise KeyError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
-        # Find the bucket the given key belongs in
-        index = self._bucket_index(element)
-        bucket = self.buckets[index]
-        # Find the entry with the given key in that bucket, if one exists
-        entry = bucket.find(element)
-        if entry is not None:  # Found
-            # Remove the key-value entry from the bucket
-            bucket.delete(entry)
-            # self.size -= 1
-        else:  # Not found
-            raise KeyError('Element not found: {}'.format(element))
+        # first copies all elements from this set 
+        for elem in self:  
+           new_set.add(elem)  
 
-    def _resize(self, new_size=None):
-        """Resize this hash table's buckets and rehash all key-value entries.
-        Should be called automatically when load factor exceeds a threshold
-        such as 0.75 after an insertion (when set is called with a new key).
-        Best and worst case running time: ??? under what conditions? [TODO]
-        Best and worst case space usage: ??? what uses this memory? [TODO]"""
-        # If unspecified, choose new size dynamically based on current size
-        if new_size is None:
-            new_size = len(self.buckets) * 2  # Double size
-        # Option to reduce size if buckets are sparsely filled (low load factor)
-        elif new_size is 0:
-            new_size = len(self.buckets) / 2  # Half size
-        # TODO: Get a list to temporarily hold all current key-value entries
-        # ...
-        # TODO: Create a new list of new_size total empty linked list buckets
-        # ...
-        # TODO: Insert each key-value entry into the new list of buckets,
-        # which will rehash them into a new bucket index based on the new size
-        old_items = self.items()  # copy the all items
-        # self.buckets = [LinkedList() for i in range(new_size)]
-        # self.size = 0
+        # now adds the other_set elements to the new set if not exist 
+        for elem in other_set:  
+            if new_set.contains(elem) != True:  
+                new_set.add(elem)  
 
-        # EXPLAIN THIS WITH BETTER LANGUAGE
-        self.__init__(new_size)
+        return new_set
 
-        for key, value in old_items:
-            # setting the old values to resized hashtable buckets
-            self.set(key, value)
+    def intersection(self, other_set):
+        """Return a new set that is the union of this set and other_set"""
+
+        pass
+
+    def difference(self, other_set):
+        """Return a new set that is the difference of this set and other_set"""
+
+        pass
+
+    def is_subset(self, subset):
+        """Return a boolean indicating whether other_set is a subset of this set"""
+
+        pass
 
 
-def test_hash_table():
-    ht = HashTable(4)
-    print('HashTable: ' + str(ht))
-
-    print('Setting entries:')
-    ht.set('I', 1)
-    print('set(I, 1): ' + str(ht))
-    ht.set('V', 5)
-    print('set(V, 5): ' + str(ht))
-    print('size: ' + str(ht.size))
-    print('length: ' + str(ht.length()))
-    print('buckets: ' + str(len(ht.buckets)))
-    print('load_factor: ' + str(ht.load_factor()))
-    ht.set('X', 10)
-    print('set(X, 10): ' + str(ht))
-    ht.set('L', 50)  # Should trigger resize
-    print('set(L, 50): ' + str(ht))
-    print('size: ' + str(ht.size))
-    print('length: ' + str(ht.length()))
-    print('buckets: ' + str(len(ht.buckets)))
-    print('load_factor: ' + str(ht.load_factor()))
-
-    print('Getting entries:')
-    print('get(I): ' + str(ht.get('I')))
-    print('get(V): ' + str(ht.get('V')))
-    print('get(X): ' + str(ht.get('X')))
-    print('get(L): ' + str(ht.get('L')))
-    print('contains(X): ' + str(ht.contains('X')))
-    print('contains(Z): ' + str(ht.contains('Z')))
-
-    print('Deleting entries:')
-    ht.delete('I')
-    print('delete(I): ' + str(ht))
-    ht.delete('V')
-    print('delete(V): ' + str(ht))
-    ht.delete('X')
-    print('delete(X): ' + str(ht))
-    ht.delete('L')
-    print('delete(L): ' + str(ht))
-    print('contains(X): ' + str(ht.contains('X')))
-    print('size: ' + str(ht.size))
-    print('length: ' + str(ht.length()))
-    print('buckets: ' + str(len(ht.buckets)))
-    print('load_factor: ' + str(ht.load_factor()))
-
-
-if __name__ == '__main__':
-    test_hash_table()
+if __name__ == "__main__":
+    s1 = Set([1, 2, 3])
+    print(s1)
+    # for elem in s1:
+    #     print(", ".join(elem))
