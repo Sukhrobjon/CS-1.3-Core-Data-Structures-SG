@@ -84,8 +84,7 @@ class Set(object):
         bucket = self.buckets[index]
         # Check if an entry with the given key exists in that bucket
         entry = bucket.find(element)
-        return entry != None  # True or False
-
+        return entry is not None # True or False
     # def get(self, key):
     #     """Return the value associated with the given key, or raise KeyError.
     #     Best case running time: ??? under what conditions? [TODO]
