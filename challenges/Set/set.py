@@ -6,10 +6,11 @@ class Set(object):
     def __init__(self, elements=None):
         """Initialize set as an empty hash table."""
         self.table = HashTable()
-
-        if len(elements) != 0:
+        self.size = 0
+        if elements:
             for elem in elements:
                 self.table.set(elem, None)
+                self.size += 1
 
     def __iter__(self):
         """Return iterable set."""
@@ -20,47 +21,37 @@ class Set(object):
         items = ['{!r}'.format(key) for key in self.table.keys()]
         return '{' + ', '.join(items) + '}'
 
-    def size(self):
-        """Returns the number of elements in the set."""
-    
-        return self.table.length()  # O(1)
-
     def contains(self, elem):
-        """Returns True if element is in the set and False otherwise.
-        """
-
+        """Returns True if element is in the set and False otherwise."""
         # Pass the element as a key to call the hash table method contains().
         return self.table.contains(elem)
 
     def add(self, elem):
         """Add element to this set, if not present already"""
         if not self.contains(elem):  
-            # Credit goes to Zurich Okoren for correcting me to pass correct params
+            # Credit goes to Zurich Okoren for correcting me to pass correct params(None)
             self.table.set(elem, None)  
-        else:
-            raise KeyError("Item is already in the set.")
+            self.size += 1
+    
 
     def remove(self, elem):
         """Removes item to the set.
         Best and Worst case running time: O(1)"""
         if self.contains(elem):  
-            self.table.delete(elem)  
+            self.table.delete(elem)
+            self.size -= 1
         else:
             raise KeyError("Element: {} not in set.".format(elem))
 
     def union(self, other_set):
         """Return a new set that is the union of this set and other_set"""
         
-        new_set = Set()
-
-        # first copies all elements from this set 
-        for elem in self:  
-           new_set.add(elem)  
+        # copying the this set element to new_set
+        new_set = Set(self.table.values()) 
 
         # now adds the other_set elements to the new set if not exist 
-        for elem in other_set:  
-            if new_set.contains(elem) != True:  
-                new_set.add(elem)  
+        for elem in other_set:    
+            new_set.add(elem)  
 
         return new_set
 
@@ -83,5 +74,12 @@ class Set(object):
 if __name__ == "__main__":
     s1 = Set([1, 2, 3])
     print(s1)
-    # for elem in s1:
-    #     print(", ".join(elem))
+    # s1 = s1.__iter__()
+    # print(s1)
+    for elem in s1:
+        print(elem, end=", ")
+    print()
+    s1.remove(1)
+    
+    print("Size: ", s1.size)
+    
