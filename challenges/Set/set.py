@@ -55,14 +55,9 @@ class Set(object):
 
         return new_set
 
-    def intersection(self, other_set):
-        """Return a new set that is the union of this set and other_set"""
-
-        pass
-
     def difference(self, other_set):
         """Return a new set that is the difference of this set and other_set"""
-        
+
         new_set = Set()
 
         for elem in self:
@@ -70,6 +65,24 @@ class Set(object):
                 # print("elem in difference: ", elem)
                 new_set.add(elem)
         return new_set
+
+
+    def intersection(self, other_set):
+        """Return a new set that is the union of this set and other_set"""
+        
+        intersection_set = Set()
+    
+        small_set = self if self.size > other_set.size else other_set
+        large_set = self if self.size < other_set.size else other_set
+        
+        # iterate through only small_set, so  
+        for elem in small_set:
+            if large_set.contains(elem): # found match from the large set
+                intersection_set.add(elem)
+
+        return intersection_set
+
+    
         
 
 
@@ -84,7 +97,7 @@ class Set(object):
 
 
 if __name__ == "__main__":
-    s1 = Set([1, 2, 3, 5, 8])
+    s1 = Set([1, 2, 3, 5])
     print(s1)
     # s1 = s1.__iter__()
     # print(s1)
@@ -94,8 +107,10 @@ if __name__ == "__main__":
    
     
     print("Size: ", s1.size)
-    s2 = Set([2, 3, 4])
+    s2 = Set([2, 3, 4, 5, 8])
     print("Testing set functions!")
     s3 = s1.difference(s2)
     print("[1, 2, 3].differnce([2, 3, 4]):", s3)
+    print("Intersection: ", s1, s2)
+    print(s1.intersection(s2))
     
