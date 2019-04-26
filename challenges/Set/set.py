@@ -12,14 +12,14 @@ class Set(object):
                 self.table.set(elem, None)
                 self.size += 1
 
-    def __iter__(self):
-        """Return iterable set."""
-        return iter(self.table.keys())
-
     def __repr__(self):
         """Return a string representation of this Set."""
         items = ['{!r}'.format(key) for key in self.table.keys()]
         return '{' + ', '.join(items) + '}'
+
+    def __iter__(self):
+        """Return iterable set."""
+        return iter(self.table.keys())
 
     def contains(self, elem):
         """Returns True if element is in the set and False otherwise."""
@@ -62,9 +62,21 @@ class Set(object):
 
     def difference(self, other_set):
         """Return a new set that is the difference of this set and other_set"""
+        
+        new_set = Set()
+
+        for elem in self:
+            if other_set.contains(elem) == False:
+                # print("elem in difference: ", elem)
+                new_set.add(elem)
+        return new_set
+        
+
+
+    def symmetric_difference(self, other_set):
+        """Return a new set that is the difference of both sets"""
 
         pass
-
     def is_subset(self, subset):
         """Return a boolean indicating whether other_set is a subset of this set"""
 
@@ -72,14 +84,18 @@ class Set(object):
 
 
 if __name__ == "__main__":
-    s1 = Set([1, 2, 3])
+    s1 = Set([1, 2, 3, 5, 8])
     print(s1)
     # s1 = s1.__iter__()
     # print(s1)
     for elem in s1:
         print(elem, end=", ")
     print()
-    s1.remove(1)
+   
     
     print("Size: ", s1.size)
+    s2 = Set([2, 3, 4])
+    print("Testing set functions!")
+    s3 = s1.difference(s2)
+    print("[1, 2, 3].differnce([2, 3, 4]):", s3)
     
