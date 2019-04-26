@@ -10,7 +10,9 @@ class Set(object):
         if elements:
             for elem in elements:
                 self.table.set(elem, None)
+                # self.add(elem)
                 self.size += 1
+
 
     def __repr__(self):
         """Return a string representation of this Set."""
@@ -22,12 +24,15 @@ class Set(object):
         return iter(self.table.keys())
 
     def contains(self, elem):
-        """Returns True if element is in the set and False otherwise."""
+        """Returns True if element is in the set and False otherwise.
+        Runnig time: O(1) since it is calling hashtable contains method"""
+
         # Pass the element as a key to call the hash table method contains().
         return self.table.contains(elem)
 
     def add(self, elem):
-        """Add element to this set, if not present already"""
+        """Add element to this set, if not present already.
+        Running time: O(1)"""
         if not self.contains(elem):  
             # Credit goes to Zurich Okoren for correcting me to pass correct params(None)
             self.table.set(elem, None)  
@@ -36,7 +41,7 @@ class Set(object):
 
     def remove(self, elem):
         """Removes item to the set.
-        Best and Worst case running time: O(1)"""
+        Running time: O(1)"""
         if self.contains(elem):  
             self.table.delete(elem)
             self.size -= 1
@@ -44,7 +49,10 @@ class Set(object):
             raise KeyError("Element: {} not in set.".format(elem))
 
     def union(self, other_set):
-        """Return a new set that is the union of this set and other_set"""
+        """Return a new set that is the union of this set and other_set
+        Running time: O(n)?
+        Space complexity: O(l) => l is number of elements gathered from both
+        sets"""
         
         # copying the this set element to new_set
         new_set = Set(self.table.values()) 
@@ -56,19 +64,22 @@ class Set(object):
         return new_set
 
     def difference(self, other_set):
-        """Return a new set that is the difference of this set and other_set"""
+        """Return a new set that is the difference of this set and other_set
+        Running time: 
+        Space complexity: """
 
         new_set = Set()
 
         for elem in self:
             if other_set.contains(elem) == False:
-                # print("elem in difference: ", elem)
                 new_set.add(elem)
         return new_set
 
 
     def intersection(self, other_set):
-        """Return a new set that is the union of this set and other_set"""
+        """Return a new set that is the union of this set and other_set
+        Running time: 
+        Space complexity: """
         
         new_set = Set()
     
@@ -81,9 +92,6 @@ class Set(object):
                 new_set.add(elem)
 
         return new_set
-
-    
-        
 
 
     def symmetric_difference(self, other_set):
@@ -102,7 +110,9 @@ class Set(object):
 
         return new_set
     def is_subset(self, other_set):
-        """Return a boolean indicating whether other_set is a subset of this set"""
+        """Return a boolean indicating whether other_set is a subset of this set
+        Running time: 
+        Space complexity: """
         
         if self.size <= other_set.size:
             for elem in self:
@@ -110,10 +120,11 @@ class Set(object):
                     return False
             return True
         return False
-        # return all(elem for elem in s)
+    
 
 
 if __name__ == "__main__":
+    
     s1 = Set([1, 2, 3, 7])
     print(s1)
     # s1 = s1.__iter__()
@@ -138,5 +149,7 @@ if __name__ == "__main__":
     print(A, B)
     print("Should return true: {}".format(A.is_subset(B)))
     
-
-    
+    duplicate = Set([1, 1])
+    print("Duplicate: ",duplicate)
+    duplicate.add(2)
+    print("Duplicate: ", duplicate)
