@@ -70,7 +70,7 @@ class Set(object):
     def intersection(self, other_set):
         """Return a new set that is the union of this set and other_set"""
         
-        intersection_set = Set()
+        new_set = Set()
     
         small_set = self if self.size > other_set.size else other_set
         large_set = self if self.size < other_set.size else other_set
@@ -78,9 +78,9 @@ class Set(object):
         # iterate through only small_set, so  
         for elem in small_set:
             if large_set.contains(elem): # found match from the large set
-                intersection_set.add(elem)
+                new_set.add(elem)
 
-        return intersection_set
+        return new_set
 
     
         
@@ -89,7 +89,18 @@ class Set(object):
     def symmetric_difference(self, other_set):
         """Return a new set that is the difference of both sets"""
 
-        pass
+        new_set = Set()
+       
+        # elements set1 has but not set 2
+        for elem in self:
+            if other_set.contains(elem) == False:
+                new_set.add(elem)
+
+        for elem in other_set:
+            if self.contains(elem) == False:
+                new_set.add(elem)
+
+        return new_set
     def is_subset(self, subset):
         """Return a boolean indicating whether other_set is a subset of this set"""
 
@@ -97,7 +108,7 @@ class Set(object):
 
 
 if __name__ == "__main__":
-    s1 = Set([1, 2, 3, 5])
+    s1 = Set([1, 2, 3, 7])
     print(s1)
     # s1 = s1.__iter__()
     # print(s1)
@@ -107,10 +118,13 @@ if __name__ == "__main__":
    
     
     print("Size: ", s1.size)
-    s2 = Set([2, 3, 4, 5, 8])
+    s2 = Set([2, 3, 4, 5, 6])
     print("Testing set functions!")
     s3 = s1.difference(s2)
-    print("[1, 2, 3].differnce([2, 3, 4]):", s3)
-    print("Intersection: ", s1, s2)
+    print("{}.difference({}):".format(s1, s2))
+    print("Intersection: {}, {}".format(s1, s2))
     print(s1.intersection(s2))
+    print("symmetric intersection:")
+    print(s1.symmetric_difference(s2))
+
     
