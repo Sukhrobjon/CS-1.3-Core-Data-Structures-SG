@@ -72,7 +72,7 @@ class Set(object):
         
         new_set = Set()
     
-        small_set = self if self.size > other_set.size else other_set
+        small_set = self if self.size >= other_set.size else other_set
         large_set = self if self.size < other_set.size else other_set
         
         # iterate through only small_set, so  
@@ -101,10 +101,16 @@ class Set(object):
                 new_set.add(elem)
 
         return new_set
-    def is_subset(self, subset):
+    def is_subset(self, other_set):
         """Return a boolean indicating whether other_set is a subset of this set"""
-
-        pass
+        
+        if self.size <= other_set.size:
+            for elem in self:
+                if other_set.contains(elem) == False:
+                    return False
+            return True
+        return False
+        # return all(elem for elem in s)
 
 
 if __name__ == "__main__":
@@ -126,5 +132,11 @@ if __name__ == "__main__":
     print(s1.intersection(s2))
     print("symmetric intersection:")
     print(s1.symmetric_difference(s2))
+    print("Subset: ")
+    A = Set([1, 2, 3])
+    B = Set([1, 2, 3, 4, 5])
+    print(A, B)
+    print("Should return true: {}".format(A.is_subset(B)))
+    
 
     
