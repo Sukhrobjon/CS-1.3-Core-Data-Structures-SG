@@ -55,13 +55,14 @@ class Set(object):
         sets"""
         
         # copying the this set element to new_set
-        new_set = Set(self.table.values()) 
+        new_set = Set(self.table.keys()) 
 
         # now adds the other_set elements to the new set if not exist 
         for elem in other_set:    
             new_set.add(elem)  
 
         return new_set
+        
 
     def difference(self, other_set):
         """Return a new set that is the difference of this set and other_set
@@ -122,9 +123,7 @@ class Set(object):
         return False
     
 
-
-if __name__ == "__main__":
-    
+def test_set():
     s1 = Set([1, 2, 3, 7])
     print(s1)
     # s1 = s1.__iter__()
@@ -132,8 +131,7 @@ if __name__ == "__main__":
     for elem in s1:
         print(elem, end=", ")
     print()
-   
-    
+
     print("Size: ", s1.size)
     s2 = Set([2, 3, 4, 5, 6])
     print("Testing set functions!")
@@ -148,8 +146,15 @@ if __name__ == "__main__":
     B = Set([1, 2, 3, 4, 5])
     print(A, B)
     print("Should return true: {}".format(A.is_subset(B)))
-    
+
     duplicate = Set([1, 1])
-    print("Duplicate: ",duplicate)
+    print("Duplicate: ", duplicate)
     duplicate.add(2)
     print("Duplicate: ", duplicate)
+
+if __name__ == "__main__":
+    # test_set()
+    s = Set(['A', 'B', 'C'])
+    other_set = Set(['A'])
+    union = s.union(other_set)
+    print(union.contains('A'))
