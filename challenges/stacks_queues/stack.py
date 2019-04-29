@@ -95,7 +95,7 @@ class ArrayStack(object):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty.
         Runnning time: O(1) because to peek we need to access item at 
-        index - 1"""
+        last index"""
         
         if self.is_empty():
             return None

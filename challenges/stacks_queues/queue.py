@@ -29,13 +29,16 @@ class LinkedQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) because appending new node is constant
+        time since we are using .tail property in our linkedlist append
+        method implementaion"""
         return self.list.append(item)
         
 
     def front(self):
         """Return the item at the front of this queue without removing it,
-        or None if this queue is empty."""
+        or None if this queue is empty.
+        Running time: O(1) get the item at the head node and return"""
         if self.is_empty():
             return None
         return self.list.head.data
@@ -43,7 +46,8 @@ class LinkedQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1), because the element we want to remove is at 
+        the head node data, and accessing head node is constant time as."""
         
         if self.is_empty():
             raise ValueError("Queue is empty.")
@@ -80,12 +84,15 @@ class ArrayQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) appending new item to dynamic array 
+        requires constant time."""
         self.list.append(item)
 
     def front(self):
         """Return the item at the front of this queue without removing it,
-        or None if this queue is empty."""
+        or None if this queue is empty.
+        Running time: O(1) returning item at the 0th index is also constant
+        time"""
         if self.is_empty():
             return None
         return self.list[0]
@@ -93,7 +100,9 @@ class ArrayQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(n) because we are deleting the item at 
+        index 0, and need to move all the remaining items to set the 
+        indexes again"""
         if self.is_empty():
             raise ValueError("Queue is empty.")
 
