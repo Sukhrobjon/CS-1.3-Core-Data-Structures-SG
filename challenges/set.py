@@ -40,13 +40,21 @@ class Set(object):
     
 
     def remove(self, elem):
-        """Removes item to the set.
+        """Removes item to the set if present, otherwise raise error.
         Running time: O(1)"""
         if self.contains(elem):  
             self.table.delete(elem)
             self.size -= 1
         else:
             raise KeyError("Element: {} not in set.".format(elem))
+
+    def discard(self, elem):
+        """Removes item to the set if present, otherwise, stays silent.
+        Running time: O(1)"""
+        if self.contains(elem):
+            self.table.delete(elem)
+            self.size -= 1
+        
 
     def union(self, other_set):
         """Return a new set that is the union of this set and other_set

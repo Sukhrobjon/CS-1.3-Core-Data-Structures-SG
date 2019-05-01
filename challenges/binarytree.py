@@ -28,6 +28,8 @@ class BinaryTreeNode(object):
         downward path from this node to a descendant leaf node).
         TODO: Best and worst case running time: ??? under what conditions?"""
         
+        left_height = 0
+        right_height = 0
         # check if root node is a leaf if not it's the only node 
         if self.is_leaf():
             return 0
@@ -39,8 +41,12 @@ class BinaryTreeNode(object):
         # Check if right child has a value and if so calculate its height
         if self.right:
             right_height = self.right.height()
+            
+
 
         # Return one more than the greater of the left height and right height
+        # at the first run both left and right height is 0 and function returns 1
+        # and keep icrementing by 1
         return max(left_height, right_height) + 1
 
         
@@ -141,7 +147,7 @@ class BinarySearchTree(object):
             elif item > node.data:
                 # Descend to the node's right child
                 node = node.right
-                continue
+    
         # Not found
         return None
 
@@ -194,7 +200,7 @@ class BinarySearchTree(object):
                 # Update the parent and descend to the node's right child
                 parent = node
                 node = node.right
-                continue
+                
         # Not found
         return parent
 
@@ -355,26 +361,28 @@ def test_binary_search_tree():
     tree = BinarySearchTree()
     print('tree: {}'.format(tree))
     print('root: {}'.format(tree.root))
+    print('height: {}'.format(tree.height()))
 
     print('\nInserting items:')
     for item in items:
         tree.insert(item)
         print('insert({}), size: {}'.format(item, tree.size))
     print('root: {}'.format(tree.root))
+    print('height: {}'.format(tree.height()))
 
-    print('\nSearching for items:')
-    for item in items:
-        result = tree.search(item)
-        print('search({}): {}'.format(item, result))
-    item = 123
-    result = tree.search(item)
-    print('search({}): {}'.format(item, result))
+    # print('\nSearching for items:')
+    # for item in items:
+    #     result = tree.search(item)
+    #     print('search({}): {}'.format(item, result))
+    # item = 123
+    # result = tree.search(item)
+    # print('search({}): {}'.format(item, result))
 
-    print('\nTraversing items:')
-    print('items in-order:    {}'.format(tree.items_in_order()))
-    print('items pre-order:   {}'.format(tree.items_pre_order()))
-    print('items post-order:  {}'.format(tree.items_post_order()))
-    print('items level-order: {}'.format(tree.items_level_order()))
+    # print('\nTraversing items:')
+    # print('items in-order:    {}'.format(tree.items_in_order()))
+    # print('items pre-order:   {}'.format(tree.items_pre_order()))
+    # print('items post-order:  {}'.format(tree.items_post_order()))
+    # print('items level-order: {}'.format(tree.items_level_order()))
 
 
 if __name__ == '__main__':
