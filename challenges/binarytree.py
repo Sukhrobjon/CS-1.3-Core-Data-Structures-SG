@@ -139,6 +139,7 @@ class BinarySearchTree(object):
             elif item > node.data:
                 # Descend to the node's right child
                 node = node.right
+                continue
         # Not found
         return None
 
@@ -191,6 +192,7 @@ class BinarySearchTree(object):
                 # Update the parent and descend to the node's right child
                 parent = node
                 node = node.right
+                continue
         # Not found
         return parent
 
@@ -203,7 +205,7 @@ class BinarySearchTree(object):
         # Check if starting node exists
         if node is None:
             # Not found (base case)
-            return None
+            return parent
         # Check if the given item matches the node's data
         if item == node.data:
             # Return the parent of the found node
@@ -212,12 +214,12 @@ class BinarySearchTree(object):
         elif item < node.data:
             # Recursively descend to the node's left child, if it exists
             # Hint: Remember to update the parent parameter
-            return self._find_parent_node_recursive(item, node.left, parent=node) 
+            return self._find_parent_node_recursive(item, node.left, node) 
         # Check if the given item is greater than the node's data
         elif item > node.data:
             # Recursively descend to the node's right child, if it exists
             # Hint: Remember to update the parent parameter
-            return self._find_parent_node_recursive(item, node.right, parent=node)
+            return self._find_parent_node_recursive(item, node.right, node)
 
     def delete(self, item):
         """Remove given item from this tree, if present, or raise ValueError.
