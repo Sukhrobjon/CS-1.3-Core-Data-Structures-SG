@@ -43,6 +43,7 @@ class BinaryTreeNode(object):
         # Return one more than the greater of the left height and right height
         return max(left_height, right_height) + 1
 
+        
         # good alternative but not that readible
         # left_height = self.left.height() if self.left else -1
         # right_height = self.right.height() if self.right else -1
