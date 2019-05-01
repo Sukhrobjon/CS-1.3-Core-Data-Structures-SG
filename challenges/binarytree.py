@@ -71,8 +71,7 @@ class BinarySearchTree(object):
         downward path from this tree's root node to a descendant leaf node).
         TODO: Best and worst case running time: ??? under what conditions?"""
         # Check if root node has a value and if so calculate its height
-        if self.root:
-            return self.root.height()
+        return 0 if self.is_empty() else self.root.height()
 
     def contains(self, item):
         """Return True if this binary search tree contains the given item.
@@ -109,12 +108,10 @@ class BinarySearchTree(object):
         
         # Check if the given item should be inserted left of parent node
         if item < parent.data:
-            # Create a new node and set the parent's left child
             parent.left = BinarySearchTree(item)
         
         # Check if the given item should be inserted right of parent node
-        elif item > parent.data:
-            # Create a new node and set the parent's right child
+        else:
             parent.right = BinarySearchTree(item)
         
         # Increase the tree size
@@ -130,18 +127,18 @@ class BinarySearchTree(object):
         node = self.root
         # Loop until we descend past the closest leaf node
         while node is not None:
-            # TODO: Check if the given item matches the node's data
-            if ...:
+            # Check if the given item matches the node's data
+            if node.data == item:
                 # Return the found node
                 return node
-            # TODO: Check if the given item is less than the node's data
-            elif ...:
-                # TODO: Descend to the node's left child
-                node = ...
-            # TODO: Check if the given item is greater than the node's data
-            elif ...:
-                # TODO: Descend to the node's right child
-                node = ...
+            # Check if the given item is less than the node's data
+            elif item < node.data:
+                # Descend to the node's left child
+                node = node.left
+            # Check if the given item is greater than the node's data
+            elif item > node.data:
+                # Descend to the node's right child
+                node = node.right
         # Not found
         return None
 
