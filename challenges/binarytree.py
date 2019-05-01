@@ -90,7 +90,7 @@ class BinarySearchTree(object):
         # Find a node with the given item, if any
         node = self._find_node_recursive(item, self.root)
         # Return the node's data if found, or None
-        return node.data if node.data == item else None
+        return node.data if node is not None else None
 
     def insert(self, item):
         """Insert the given item in order into this binary search tree.
@@ -99,7 +99,7 @@ class BinarySearchTree(object):
         # Handle the case where the tree is empty
         if self.is_empty():
             # Create a new root node
-            self.root = item
+            self.root = BinaryTreeNode(item)
             # Increase the tree size
             self.size += 1
             return
@@ -108,11 +108,11 @@ class BinarySearchTree(object):
         
         # Check if the given item should be inserted left of parent node
         if item < parent.data:
-            parent.left = BinarySearchTree(item)
+            parent.left = BinaryTreeNode(item)
         
         # Check if the given item should be inserted right of parent node
         else:
-            parent.right = BinarySearchTree(item)
+            parent.right = BinaryTreeNode(item)
         
         # Increase the tree size
         self.size += 1
