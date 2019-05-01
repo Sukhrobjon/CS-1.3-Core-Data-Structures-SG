@@ -28,10 +28,6 @@ class BinaryTreeNode(object):
         downward path from this node to a descendant leaf node).
         TODO: Best and worst case running time: ??? under what conditions?"""
         
-        # initialize the left and right counter
-        left_height = 0
-        right_height = 0
-        
         # check if root node is a leaf if not it's the only node 
         if self.is_leaf():
             return 0
@@ -46,6 +42,11 @@ class BinaryTreeNode(object):
 
         # Return one more than the greater of the left height and right height
         return max(left_height, right_height) + 1
+
+        # good alternative but not that readible
+        # left_height = self.left.height() if self.left else -1
+        # right_height = self.right.height() if self.right else -1
+        # return max(left_height, right_height) + 1
 
 
 class BinarySearchTree(object):
