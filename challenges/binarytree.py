@@ -42,18 +42,10 @@ class BinaryTreeNode(object):
         if self.right:
             right_height = self.right.height()
             
-
-
         # Return one more than the greater of the left height and right height
-        # at the first run both left and right height is 0 and function returns 1
-        # and keep icrementing by 1
+        # when left and right node is none both left and right height is 0 and 
+        # function returns 1 and keep icrementing by 1
         return max(left_height, right_height) + 1
-
-        
-        # good alternative but not that readible
-        # left_height = self.left.height() if self.left else -1
-        # right_height = self.right.height() if self.right else -1
-        # return max(left_height, right_height) + 1
 
 
 class BinarySearchTree(object):
