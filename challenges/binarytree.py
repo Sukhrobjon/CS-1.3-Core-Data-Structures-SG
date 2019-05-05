@@ -401,8 +401,6 @@ class BinarySearchTree(object):
                 queue.enqueue(node.right)
             
             
-
-
 def test_binary_search_tree():
     # Create a complete binary search tree of 3, 7, or 15 items in level-order
     # items = [2, 1, 3]
@@ -422,19 +420,19 @@ def test_binary_search_tree():
     print('root: {}'.format(tree.root))
     print('height: {}'.format(tree.height()))
 
-    # print('\nSearching for items:')
-    # for item in items:
-    #     result = tree.search(item)
-    #     print('search({}): {}'.format(item, result))
-    # item = 123
-    # result = tree.search(item)
-    # print('search({}): {}'.format(item, result))
+    print('\nSearching for items:')
+    for item in items:
+        result = tree.search(item)
+        print('search({}): {}'.format(item, result))
+    item = 123
+    result = tree.search(item)
+    print('search({}): {}'.format(item, result))
 
-    # print('\nTraversing items:')
-    # print('items in-order:    {}'.format(tree.items_in_order()))
-    # print('items pre-order:   {}'.format(tree.items_pre_order()))
-    # print('items post-order:  {}'.format(tree.items_post_order()))
-    # print('items level-order: {}'.format(tree.items_level_order()))
+    print('\nTraversing items:')
+    print('items in-order:    {}'.format(tree.items_in_order()))
+    print('items pre-order:   {}'.format(tree.items_pre_order()))
+    print('items post-order:  {}'.format(tree.items_post_order()))
+    print('items level-order: {}'.format(tree.items_level_order()))
 
 
 if __name__ == '__main__':
