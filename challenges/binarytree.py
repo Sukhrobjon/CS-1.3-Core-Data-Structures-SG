@@ -315,8 +315,8 @@ class BinarySearchTree(object):
         items = []
         if not self.is_empty():
             # Traverse tree post-order from root, appending each node's item
-            # self._traverse_post_order_recursive(self.root, items.append)
-            items = self._traverse_post_order_iterative(self.root)
+            self._traverse_post_order_recursive(self.root, items.append)
+            # items = self._traverse_post_order_iterative(self.root)
         # Return post-order list of all items in tree
         return items
 
@@ -325,21 +325,35 @@ class BinarySearchTree(object):
         Start at the given node and visit each node with the given function.
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
-        # TODO: Traverse left subtree, if it exists
-        ...
-        # TODO: Traverse right subtree, if it exists
-        ...
-        # TODO: Visit this node's data with given function
-        ...
+        
+        if node is not None:
+            # Traverse left subtree, if it exists
+            self._traverse_post_order_recursive(node.left, visit)
+            # Traverse right subtree, if it exists
+            self._traverse_post_order_recursive(node.right, visit)
+            visit(node.data)
 
     def _traverse_post_order_iterative(self, node):
         """Traverse this binary tree with iterative post-order traversal (DFS).
         Start at the given node and visit each node with the given function.
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
-
-
-        items = [None] * self.size # create a list equal to size of tree
+        '''
+        # Using set and stack 
+        stack = Stack()
+        stack.push(node)
+        visited = set()
+        while not stack.is_empty():
+            if(stack.peek().left != None and stack.peek().left.data not in visited):
+                stack.push(stack.peek().left)
+            elif(stack.peek().right != None and stack.peek().right.data not in visited):
+                stack.push(stack.peek().right)
+            else:
+                node = stack.pop()
+                visit(node.data)
+                visited.add(node.data)'''
+        # create a list equal to size of tree
+        items = [None] * self.size 
 
         i = self.size
         stack = Stack()
