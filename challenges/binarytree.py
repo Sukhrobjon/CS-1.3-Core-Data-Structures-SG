@@ -1,5 +1,5 @@
 #!python
-from stack import Stack
+from stack import LinkedStack
 from queue import Queue
 
 class BinaryTreeNode(object):
@@ -27,7 +27,7 @@ class BinaryTreeNode(object):
     def height(self):
         """Return the height of this node (the number of edges on the longest
         downward path from this node to a descendant leaf node).
-        TODO: Best and worst case running time: ??? under what conditions?"""
+        Running time: O(log(n)) if tree is binary"""
         
         left_height = 0
         right_height = 0
@@ -235,7 +235,9 @@ class BinarySearchTree(object):
         items = []
         if not self.is_empty():
             # Traverse tree in-order from root, appending each node's item
+            # item.append is uncalled function
             self._traverse_in_order_recursive(self.root, items.append)
+            
             # self._traverse_in_order_iterative(self.root, items.append)
         # Return in-order list of all items in tree
         return items
@@ -243,10 +245,10 @@ class BinarySearchTree(object):
     def _traverse_in_order_recursive(self, node, visit):
         """Traverse this binary tree with recursive in-order traversal (DFS).
         Start at the given node and visit each node with the given function.
-        TODO: Running time: ??? Why and under what conditions?
-        TODO: Memory usage: ??? Why and under what conditions?"""
+        Running time: O(n) we are visiting each node
+        Memory usage: O(n) creating a stack with number of nodes in the tree"""
         
-        if(node is not None):
+        if(node):
             # Traverse left subtree, if it exists
             self._traverse_in_order_recursive(node.left, visit)
             # Visit this node's data with given function
@@ -260,14 +262,14 @@ class BinarySearchTree(object):
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
         
-        stack = Stack()
+        stack = LinkedStack()
         stack.push(node) # push the root node
         while not stack.is_empty():
             if(stack.peek().left != None): # if node has left child
                 stack.push(stack.peek().left)
             else:
                 node = stack.pop()
-                visit(node.data)
+                visit(node.data) 
                 if(not stack.is_empty()):
                     node = stack.pop()
                     visit(node.data)
@@ -300,7 +302,7 @@ class BinarySearchTree(object):
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
         
-        stack = Stack()
+        stack = LinkedStack()
         stack.push(node)
         while not stack.is_empty():
             node = stack.pop()
@@ -356,7 +358,7 @@ class BinarySearchTree(object):
         items = [None] * self.size 
 
         i = self.size
-        stack = Stack()
+        stack = LinkedStack()
         stack.push(node)
         while not stack.is_empty():
             i -= 1
@@ -381,8 +383,9 @@ class BinarySearchTree(object):
     def _traverse_level_order_iterative(self, start_node, visit):
         """Traverse this binary tree with iterative level-order traversal (BFS).
         Start at the given node and visit each node with the given function.
-        TODO: Running time: ??? Why and under what conditions?
-        TODO: Memory usage: ??? Why and under what conditions?"""
+        TODO: Running time: O(n) we visit n times each node
+        TODO: Memory usage: O(n) Why and under what conditions?"""
+        
         # Create queue to store nodes not yet traversed in level-order
         queue = Queue()
         # Enqueue given starting node
