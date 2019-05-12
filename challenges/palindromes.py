@@ -45,8 +45,6 @@ def is_palindrome_recursive(text, left=None, right=None):
     
     return False
 
-    
-
 
 def main():
     import sys

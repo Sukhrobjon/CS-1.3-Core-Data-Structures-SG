@@ -3,12 +3,11 @@
 
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text.
-    Run time: O(m*n) because to I am calling find_index() and it takes 
+    Run time: O(m*n) because I am calling find_index() and it takes 
     O(m*n). From there I obtain the index and check if it is exist or not.
     Space Complexity: O(1) because I only create a variable to store the index."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement contains here (iteratively and/or recursively)
     
     
     index = find_index(text, pattern) # find_index() function is O(n*m)
@@ -25,7 +24,7 @@ def find_index(text, pattern):
     match is found.
     Space Complexity: O(1) because I am accessing the array indexes, it takes O(1)
     and doesn't create a new memory as opposed to pyhton slicing. 
-    Also, I am not creating a array, just 3 variable to store the indexes"""
+    declaring 3 variable takes constant space in the memory"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     

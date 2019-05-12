@@ -14,7 +14,7 @@ def factorial(n):
 
 
 def factorial_iterative(n):
-    # TODO: implement the factorial function iteratively here - DONE
+    
     result = 1
     if n == 0 or n == 1:
         return 1
