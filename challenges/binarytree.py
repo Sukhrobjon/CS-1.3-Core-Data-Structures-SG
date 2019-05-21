@@ -346,6 +346,7 @@ class BinarySearchTree(object):
             self._traverse_post_order_recursive(node.left, visit)
             # Traverse right subtree, if it exists
             self._traverse_post_order_recursive(node.right, visit)
+            # visit the node add to list
             visit(node.data)
 
     def _traverse_post_order_iterative(self, node):
@@ -370,18 +371,23 @@ class BinarySearchTree(object):
         # create a list equal to size of tree
         items = [None] * self.size 
 
-        i = self.size
+        i = self.size # i is the last node
         stack = LinkedStack()
+        # add the root node to stack
         stack.push(node)
+        # traverse through stack is empty
         while not stack.is_empty():
             i -= 1
             node = stack.pop()
+            # i is the last index and assign it to data at the root
             items[i] = node.data
+            # check if node has left child and add to stack if it is 
             if(node.left != None):
                 stack.push(node.left)
+            # check if node has right child and add to stack if it is     
             if(node.right != None):
                 stack.push(node.right)
-
+        
         return items
 
     def items_level_order(self):
