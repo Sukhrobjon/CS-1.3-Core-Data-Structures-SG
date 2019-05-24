@@ -1,6 +1,6 @@
 #!python
 from stack import LinkedStack
-from queue import Queue
+from queue import LinkedQueue
 
 class BinaryTreeNode(object):
 
