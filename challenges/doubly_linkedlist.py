@@ -1,20 +1,20 @@
 #!python
 
 
-class Node(object):
+class DoublyNode(object):
 
     def __init__(self, data):
         """Initialize this node with the given data."""
         self.data = data
         self.next = None
-        self.previous = None
+        self.prev = None
 
     def __repr__(self):
         """Return a string representation of this node."""
         return 'Node({!r})'.format(self.data)
 
 
-class LinkedList(object):
+class DoublyLinkedList(object):
 
     def __init__(self, iterable=None):
         """Initialize this linked list and append the given items, if any."""
@@ -106,26 +106,27 @@ class LinkedList(object):
         for _ in range(index - 1):
             current_node = current_node.next
 
-        new_node = Node(item)
+        new_node = DoublyNode(item)
         new_node.next = current_node
         current_node.next = new_node
         self.size += 1
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        Worst case running time: O(n) if traversing nodes and loop
+        Worst case running time: O(n) if traversing nodes and loop 
         through all the way at the end.
         Best case running time: O(1) if .tail property is used to access 
-        the last node. The current implementation performs O(1) time complexity"""
+        the last node."""
         
         # Create a new node to hold the given item
-        new_node = Node(item)
+        new_node = DoublyNode(item)
         # Check if this linked list is empty
         if self.is_empty():
             # Assign head to new node
             self.head = new_node
         else:
             # Otherwise insert new node after tail
+            new_node.prev = self.tail
             self.tail.next = new_node
         # Update tail to new node regardless
         self.tail = new_node
@@ -133,10 +134,10 @@ class LinkedList(object):
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        Best case running time: O(1) if .tail property is used to access 
-        the last node. The current implementation performs O(1) time complexity"""
+        Best case running time: O(1) if .head property is used to access 
+        the head node."""
         # Create a new node to hold the given item
-        new_node = Node(item)
+        new_node = DoublyNode(item)
         # Check if this linked list is empty
         if self.is_empty():
             # Assign tail to new node
