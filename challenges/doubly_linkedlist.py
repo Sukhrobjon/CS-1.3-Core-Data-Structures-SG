@@ -33,7 +33,7 @@ class DoublyLinkedList(object):
 
     def __repr__(self):
         """Return a string representation of this linked list."""
-        return 'LinkedList({!r})'.format(self.items())
+        return 'DoublyLinkedList({!r})'.format(self.items())
 
     def items(self):
         """Return a list of all items in this linked list.
