@@ -125,9 +125,11 @@ class DoublyLinkedList(object):
             # Assign head to new node
             self.head = new_node
         else:
-            # Otherwise insert new node after tail
+            # point the new node .prev to old tail 
             new_node.prev = self.tail
+            # Otherwise insert new node after tail
             self.tail.next = new_node
+
         # Update tail to new node regardless
         self.tail = new_node
         self.size += 1
@@ -143,6 +145,9 @@ class DoublyLinkedList(object):
             # Assign tail to new node
             self.tail = new_node
         else:
+            # point the old head prev pointer to new node,
+            # so new node will become the new head 
+            self.head.prev = new_node
             # Otherwise insert new node before head
             new_node.next = self.head
         # Update head to new node regardless
