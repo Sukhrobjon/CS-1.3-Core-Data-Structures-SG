@@ -74,10 +74,18 @@ class DoublyLinkedList(object):
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
 
-        current_node = self.head
-
-        for _ in range(index):  # loop through the linkedlist until we get the index
-            current_node = current_node.next
+        # if the index is 
+        if(index <= (self.size // 2)):
+            # 
+            current_node = self.head
+            # loop through the linkedlist until we get the index
+            for _ in range(index):  
+                current_node = current_node.next
+        else:
+            current_node = self.tail
+            for _ in range(self.size - index - 1):
+                current_node = current_node.prev
+        
 
         return current_node.data
 
@@ -145,7 +153,7 @@ class DoublyLinkedList(object):
             # Assign tail to new node
             self.tail = new_node
         else:
-            # point the old head prev pointer to new node,
+            # point the old head previous pointer to new node,
             # so new node will become the new head 
             self.head.prev = new_node
             # Otherwise insert new node before head
