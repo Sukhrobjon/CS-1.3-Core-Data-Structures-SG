@@ -74,19 +74,22 @@ class DoublyLinkedList(object):
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
 
-        # if the index is 
+        # check if the index is less the half of size of DLL
+        # if so, the item is in the first half
         if(index <= (self.size // 2)):
-            # 
+            # set the current node at the head 
             current_node = self.head
-            # loop through the linkedlist until we get the index
+            # loop through the linkedlist only to get the item at the index
             for _ in range(index):  
                 current_node = current_node.next
+        # otherwise, the item is on the second half
         else:
+            # start at the tail
             current_node = self.tail
+            # Traverse the linkedlist backwards and stop one before the desired item
             for _ in range(self.size - index - 1):
                 current_node = current_node.prev
-        
-
+        # return desired node's data
         return current_node.data
 
     def insert_at_index(self, index, item):
