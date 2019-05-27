@@ -406,7 +406,7 @@ class BinarySearchTree(object):
         Memory usage: O(n) Why and under what conditions?"""
         
         # Create queue to store nodes not yet traversed in level-order
-        queue = Queue()
+        queue = LinkedQueue()
         # Enqueue given starting node
         queue.enqueue(start_node)
         # Loop until queue is empty
