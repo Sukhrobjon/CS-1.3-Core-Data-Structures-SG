@@ -9,15 +9,6 @@ Data structures are the building blocks of computer science. It's the foundation
 
 Implementations of these concepts are how some of the largest tech companies in the world were built. Displaying relevant search results and finding friends and peers on social networks would be impossible without these core concepts. They're also **the most common topics for software engineering interviews**, and leveling up your knowledge on these topics is required to nail that technical interview! 
 
-## Course Specifics
-
-Weeks to Completion:  7 <br>
-Total Seat Hours:  37.5 hours <br>
-Total Out-of-Class Hours: 75 hours <br>
-Total Hours: 112.5 hours <br>
-Units:  3 units <br>
-Delivery Method:  Residential <br>
-Class Sessions:  14 classes, 7 labs
 
 ## Prerequisites:  
 
