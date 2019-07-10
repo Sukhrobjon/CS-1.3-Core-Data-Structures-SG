@@ -57,8 +57,7 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        Worst case running time: O(n) if traversing nodes
-        Best case running time: O(1) if .size property is used."""
+        Running time: O(1) if .size property is used."""
         
         return self.size
 
