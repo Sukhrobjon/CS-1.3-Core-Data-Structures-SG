@@ -46,7 +46,7 @@ def encode(number, base):
     dividend = number
     divisor = base
     quotient = 1
-    
+
     # in ascii table lower case 'a' is at the number 97
     # so adding 10 + 87 = 97 => 'a', 11 + 87 = 98 => 'b' and so on
     hex_letter_offset = 87
@@ -54,8 +54,8 @@ def encode(number, base):
     result = ''
 
     while quotient != 0:
-        # check if dividend(number) is less than divisor(base) 
-        # if true no need to devide. then divedend = remainder 
+        # check if dividend(number) is less than divisor(base)
+        # if true no need to devide. then divedend = remainder
         if dividend < divisor:
             remainder = dividend
             quotient = 0
@@ -68,8 +68,9 @@ def encode(number, base):
             remainder = chr(remainder + hex_letter_offset)
 
         result += str(remainder)
-        
+ 
     return result[::-1]
+
 
 def convert(digits, base1, base2):
     """Convert given digits in base1 to digits in base2.
@@ -80,10 +81,10 @@ def convert(digits, base1, base2):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base1 <= 36, 'base1 is out of range: {}'.format(base1)
     assert 2 <= base2 <= 36, 'base2 is out of range: {}'.format(base2)
-    
+
     if base1 == base2:
         return digits
-    
+
     # first decode the digits to decimal version
     decimal = decode(digits, base1)
     result = encode(decimal, base2)
@@ -109,6 +110,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
-    
-    
