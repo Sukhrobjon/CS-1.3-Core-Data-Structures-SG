@@ -2,6 +2,7 @@
 from stack import LinkedStack
 from queue import LinkedQueue
 
+
 class BinaryTreeNode(object):
 
     def __init__(self, data):
@@ -28,13 +29,13 @@ class BinaryTreeNode(object):
         """Return the height of this node (the number of edges on the longest
         downward path from this node to a descendant leaf node).
         Running time: O(log(n)) if tree is binary"""
-        
+
         left_height = 0
         right_height = 0
-        # check if root node is a leaf if not it's the only node 
+        # check if root node is a leaf if not it's the only node
         if self.is_leaf():
             return 0
-        
+
         # Check if left child has a value and if so calculate its height
         if self.left:
             left_height = self.left.height()
@@ -42,7 +43,7 @@ class BinaryTreeNode(object):
         # Check if right child has a value and if so calculate its height
         if self.right:
             right_height = self.right.height()
-            
+
         # Return one more than the greater of the left height and right height
         # when left and right node is none both left and right height is 0 and 
         # function returns 1 and keep icrementing by 1
@@ -403,8 +404,8 @@ class BinarySearchTree(object):
         """Traverse this binary tree with iterative level-order traversal (BFS).
         Start at the given node and visit each node with the given function.
         Running time: O(n) we visit n times each node
-        Memory usage: O(n) Why and under what conditions?"""
-        
+        Memory usage: O(n) we are creating a queue, and adding each node to it"""
+
         # Create queue to store nodes not yet traversed in level-order
         queue = LinkedQueue()
         # Enqueue given starting node

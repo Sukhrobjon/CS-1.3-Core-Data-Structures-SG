@@ -17,7 +17,7 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    
+
     result = 0
     power = len(digits)-1
     for i in range(len(digits)):
@@ -68,7 +68,7 @@ def encode(number, base):
             remainder = chr(remainder + hex_letter_offset)
 
         result += str(remainder)
- 
+
     return result[::-1]
 
 
